@@ -1,7 +1,9 @@
 const fs = require('fs');
 
-const path = require('path');
-const dirPath= path.join(__dirname,'crud');
+
+//path Module
+const path = require('path');  // folder module
+const dirPath= path.join(__dirname,'crud');  // current crud folder path 
 const filePath = `${dirPath}/apple.txt`;
 
 
