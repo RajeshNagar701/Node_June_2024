@@ -37,6 +37,23 @@ app.get("/single", async (req, resp) => {
     resp.send(data);
 })
 
+
+// search data by patern column 
+
+app.get("/search/:key", async (req, resp) => {
+ 
+	//console.log(req.params.key);
+	let data = await userModel.find({
+		"$or":[
+                {name:{$regex:req.params.key}},
+				{email:{$regex:req.params.key}}
+              ]
+	});
+    resp.send(data);
+})
+
+
+
 //put http://localhost:5000/update/637f3ba97f546bbfeae336c3
 
 app.put("/update/:_id",async (req, resp) => {
@@ -54,5 +71,28 @@ app.delete("/delete/:_id", async (req, resp) => {
     let data = await userModel.deleteOne(req.params);
     resp.send(data);
 })
+
+
+
+
+app.get("/login", async (req, resp) => {
+ 
+	console.log(req.body);
+	let data = await userModel.find({
+		$and:[{"email":req.body.email},{"password": req.body.password}]
+	});
+	if(data.length>0)
+	{
+		resp.send({"msg":"Login success"});	
+	}
+	else
+	{
+		resp.send({"msg":"Login Failed due to Wrong Credencial"});	
+	}
+    
+	
+})
+
+
 
 app.listen(5000);

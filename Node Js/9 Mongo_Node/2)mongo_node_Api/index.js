@@ -3,7 +3,6 @@ const dbConnect=require('./MongoConn');
 const express=require('express');
 const app=express();
 
-
 app.use(express.json());
 
 // get all data  http://localhost:5000/getdata
